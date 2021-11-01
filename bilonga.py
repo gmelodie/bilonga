@@ -24,12 +24,12 @@ def create_tunnel(in_port, out_port):
             threading.Thread(target=process_incomming_connection, args=(in_conn, out_sock)).start()
 
 
-def bilonga(in_port=80, out_port=8080):
-    while True:
-        create_tunnel(in_port, out_port)
+def bilonga(in_out_ports=[(80,8080)]):
+    for in_port, out_port in in_out_ports:
+        threading.Thread(target=create_tunnel, args=(in_port, out_port)).start()
         print(f'New tunnel {in_port} -> {out_port}')
 
 
 if __name__ == '__main__':
-    bilonga(in_port=82, out_port=8082)
+    bilonga([(85,86), (87, 88)])
 
