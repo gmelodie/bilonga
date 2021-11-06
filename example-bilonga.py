@@ -6,7 +6,7 @@ app = bilonga.Bilonga()
 def my_handler(data):
     if data == 'hello\n':
         # return True, data
-        return data + "this is a hello"
-    return data + "this is NOT a hello"
+        return data + "this is a hello", True
+    return data + "this is NOT a hello", False
 
 app.run()

@@ -9,7 +9,9 @@ def process_incomming_connection(connection, handler_func, out_sock):
     with connection:
         data = connection.recv(1024)
         while data:
-            out_sock.sendall(handler_func(data.decode()).encode())
+            handled_data, allow_data_flow = handler_func(data.decode())
+            if allow_data_flow:
+                out_sock.sendall(handled_data.encode())
             data = connection.recv(1024)
 
 
